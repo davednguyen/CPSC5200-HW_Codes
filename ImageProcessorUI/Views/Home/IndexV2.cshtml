@@ -1,0 +1,47 @@
+﻿@model ImageProcessorUI.Models.ImageData
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form>
+    <div class="form-group">
+        <img src="@Model.ImageSoucePath" alt="Smiley face" height="100" width="100"/>
+        <div class="form-control">
+            <div class="imageString">
+            @Model.SourceImageFile
+        </div>
+    </div>
+        <div class="form-control"><div class="imageString">@Model.Id</div></div>
+        <div class="form-control"><div class="imageString">@Model.RotatedLeftImage</div></div>
+        <div class="form-control"><div class="imageString">@Model.ResizedImageFile</div></div>
+        <div class="form-control"><div class="imageString">@Model.RotatedRightImage</div></div>
+        <div class="form-control"><div class="imageString">@Model.VerticallyFlippedImage</div></div>
+        <div class="form-control"><div class="imageString">@Model.HorizonallyFlippedImage</div></div>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">ID</th>
+            <th scope="col">Need resize</th>
+            <th scope="col">Need Rotate left</th>
+            <th scope="col">Need Rotate right</th>
+            <th scope="col">Need flip vertically</th>
+            <th scope="col">Need flip horizontally</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            @*<th scope="row">1</th>*@
+            <td>@Model.Title</td>
+            <td>@Model.Id</td>
+            <td>@Model.NeedResize</td>
+            <td>@Model.NeedRotateLeft</td>
+            <td>@Model.NeedRotateRight</td>
+            <td>@Model.NeedFlipVertical</td>
+            <td>@Model.NeedFlipHorizontal</td>
+        </tr>       
+    </tbody>
+</table>
