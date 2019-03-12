@@ -125,7 +125,7 @@ namespace ImageProcessorAPI.Controllers
                 //check if request need to resize image 
                 if (imageData.NeedResize)
                 {
-                    imageData.ResizedImageFile = resizeImage(imageFileBase, imageData.ImageWidth, imageData.ImageHeight);
+                    imageData.ResizedImageFile = resizeImage(imageFileBase, imageRequest.ImageWidth, imageRequest.ImageHeight);
                 }
 
                 //check if request need to retate image

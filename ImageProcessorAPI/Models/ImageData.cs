@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Drawing;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace ImageProcessorAPI.Models
+﻿namespace ImageProcessorAPI.Models
 {
     /// <summary>
     /// Properties of data model for an image request

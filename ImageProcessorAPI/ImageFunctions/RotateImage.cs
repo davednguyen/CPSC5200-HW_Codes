@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ImageProcessorAPI.ImageFunctions
 {
@@ -24,10 +21,11 @@ namespace ImageProcessorAPI.ImageFunctions
             byte[] imgBytes = Convert.FromBase64String(imageFile);
             MemoryStream stream = new MemoryStream(imgBytes);
             Image info = Image.FromStream(stream);
-            Bitmap rotatedLeftImage = new Bitmap(info.Width, info.Height);
-            rotatedLeftImage.RotateFlip(RotateFlipType.RotateNoneFlipX);
+            Bitmap rotatedLeftImage = new Bitmap(info);
+            rotatedLeftImage.RotateFlip(RotateFlipType.Rotate90FlipX);
             MemoryStream smallerStream = new MemoryStream();
-            rotatedLeftImage.Save(smallerStream, ImageFormat.Jpeg);
+            //rotatedLeftImage.Save(smallerStream, ImageFormat.Jpeg);
+            rotatedLeftImage.Save(smallerStream, info.RawFormat);
             byte[] smallerImageBytes = smallerStream.ToArray();
             rotatedImageFile = Convert.ToBase64String(smallerImageBytes);
             return rotatedImageFile;
@@ -44,10 +42,11 @@ namespace ImageProcessorAPI.ImageFunctions
             byte[] imgBytes = Convert.FromBase64String(imageFile);
             MemoryStream stream = new MemoryStream(imgBytes);
             Image info = Image.FromStream(stream);
-            Bitmap rotatedRightImage = new Bitmap(info.Width, info.Height);
-            rotatedRightImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+            Bitmap rotatedRightImage = new Bitmap(info);
+            rotatedRightImage.RotateFlip(RotateFlipType.Rotate90FlipY);
             MemoryStream smallerStream = new MemoryStream();
-            rotatedRightImage.Save(smallerStream, ImageFormat.Jpeg);
+            //rotatedRightImage.Save(smallerStream, ImageFormat.Bmp);
+            rotatedRightImage.Save(smallerStream, info.RawFormat);
             byte[] smallerImageBytes = smallerStream.ToArray();
             rotatedImageFile = Convert.ToBase64String(smallerImageBytes);
             return rotatedImageFile;

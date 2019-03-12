@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.IO;
+//using Color = System.Drawing.Color;
+
+
 
 
 
@@ -18,12 +20,29 @@ namespace ImageProcessorAPI.ImageFunctions
         { 
             string rotatedImageFile = null;
             byte[] imgBytes = Convert.FromBase64String(imageFile);
+            Image info = null;
             MemoryStream stream = new MemoryStream(imgBytes);
-            Image info = Image.FromStream(stream);
-            Bitmap grayscaledImage = new Bitmap(info.Width, info.Height);
-            grayscaledImage.MakeTransparent();
+            info = Image.FromStream(stream);
+            Bitmap grayscaledImage = new Bitmap(info);
+            for (int y = 0; y < grayscaledImage.Height; y++)
+            {
+                for (int x = 0; x < grayscaledImage.Width; x++)
+                {
+                    Color c = grayscaledImage.GetPixel(x, y);
+
+                    int r = c.R;
+                    int g = c.G;
+                    int b = c.B;
+                    int avg = (r + g + b) / 3;
+                    grayscaledImage.SetPixel(x, y, Color.FromArgb(avg, avg, avg));
+                }
+            }
+            //grayscaledImage.MakeTransparent();
+            //grayscaledImage.
+            //Bitmap grayscaledImage = ConvertToGrayscale(info);
             MemoryStream smallerStream = new MemoryStream();
-            grayscaledImage.Save(smallerStream, ImageFormat.Jpeg);
+            //grayscaledImage.Save(smallerStream, ImageFormat.Jpeg);
+            grayscaledImage.Save(smallerStream, info.RawFormat);
             byte[] smallerImageBytes = smallerStream.ToArray();
             rotatedImageFile = Convert.ToBase64String(smallerImageBytes);
             return rotatedImageFile;
